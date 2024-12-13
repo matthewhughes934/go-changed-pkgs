@@ -1,0 +1,3 @@
+# try and stop git running on Windows from converting line endings
+# in patches, since that renders them invalid
+patches/*.patch eol=lf
