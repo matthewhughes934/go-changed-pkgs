@@ -184,6 +184,9 @@ func TestRelativeRepoAndModDirs(t *testing.T) {
 	require.NoError(t, err)
 	worktreePath, err := filepath.Rel(cwd, absWorktreePath)
 	require.NoError(t, err)
+	// the relative path might be a symlink (seen on GitHub action MacOS runner)
+	worktreePath, err = filepath.EvalSymlinks(worktreePath)
+	require.NoError(t, err)
 	modDir := filepath.Join(worktreePath, modPath)
 
 	prePatchHead, postPatchHead := commitPatches(t, worktreePath, patchName)
