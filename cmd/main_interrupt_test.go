@@ -28,7 +28,7 @@ func TestApp_ExitsOnSigint(t *testing.T) {
 		time.Second,
 		10*time.Millisecond,
 	)
-	args := append(progArgs, "--from-sha", "HEAD", "--to-sha", "HEAD")
+	args := append(progArgs, "--from-ref", "HEAD", "--to-ref", "HEAD")
 
 	app := buildTestApp(io.Discard)
 	exit, err := runApp(interruptedCtx, app, args)
