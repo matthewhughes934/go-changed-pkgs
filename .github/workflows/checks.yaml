@@ -7,13 +7,22 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go_version:
+          - "1.22"
+          - "1.23"
+        os:
+          - windows-latest
+          - ubuntu-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version-file: 'go.mod'
+          go-version: ${{ matrix.go_version }}
       - name: test
         run: make report-coverage
       - name: check-coverage
