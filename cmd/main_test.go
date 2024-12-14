@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"sync"
 	"testing"
@@ -25,6 +26,10 @@ var (
 	// mutex to avoid concurrent `git worktree` commands.
 	worktreeMutex sync.Mutex
 )
+
+func isWindows() bool {
+	return runtime.GOOS == "windows"
+}
 
 // the name of the test module.
 const testModuleName = "example.com/test-repo"
@@ -183,6 +188,12 @@ func TestRelativeRepoAndModDirs(t *testing.T) {
 	cwd, err := os.Getwd()
 	require.NoError(t, err)
 	worktreePath, err := filepath.Rel(cwd, absWorktreePath)
+	if err != nil && isWindows() {
+		t.Skip("skipping relative path test on windows")
+	}
+	require.NoError(t, err)
+	// the relative path might be a symlink (seen on GitHub action MacOS runner)
+	worktreePath, err = filepath.EvalSymlinks(worktreePath)
 	require.NoError(t, err)
 	modDir := filepath.Join(worktreePath, modPath)
 
@@ -255,6 +266,9 @@ func commitPatches(t *testing.T, repoDir string, patchNames ...string) (string, 
 }
 
 func TestErrorsWhenFailsToReadPackages(t *testing.T) {
+	if isWindows() {
+		t.Skip("Not running on windows: uses chmod with unix permissions")
+	}
 	t.Parallel()
 	// create directory we don't have permission to search
 	modDir := filepath.Join(t.TempDir(), "moddir")
@@ -300,6 +314,9 @@ func TestErrorsWhenFailstoListingChangedFiles(t *testing.T) {
 func TestErrorsWhenFailsToReadingGoMod(t *testing.T) {
 	t.Parallel()
 	worktreeName := "remove-go-mod"
+	// the error uses the path given to us from `git diff`, and that uses `/`
+	// as the path separator, even on windows
+	reportedModPath := strings.Join(strings.Split(modPath, string(filepath.Separator)), "/")
 
 	err := runWithPatches(
 		t,
@@ -308,12 +325,16 @@ func TestErrorsWhenFailsToReadingGoMod(t *testing.T) {
 		io.Discard,
 	)
 
-	require.ErrorContains(t, err, "reading "+filepath.Join(modPath, "go.mod"))
+	require.ErrorContains(t, err, "reading "+reportedModPath+"/go.mod")
 }
 
 func TestErrorsWhenFailingToParseGoMod(t *testing.T) {
 	t.Parallel()
 	worktreePath := setupWorktree(t, "break-go-mod")
+	// the error uses the path given to us from `git diff`, and that uses `/`
+	// as the path separator, even on windows
+	reportedModPath := strings.Join(strings.Split(modPath, string(filepath.Separator)), "/")
+
 	// break `go.mod`...
 	_, headSha := commitPatches(t, worktreePath, "break-go-mod.patch")
 
@@ -323,7 +344,7 @@ func TestErrorsWhenFailingToParseGoMod(t *testing.T) {
 	require.ErrorContains(
 		t,
 		err,
-		"parsing mod file "+filepath.Join(modPath, "go.mod")+" at "+headSha,
+		"parsing mod file "+reportedModPath+"/go.mod"+" at "+headSha,
 	)
 }
 
