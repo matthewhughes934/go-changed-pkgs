@@ -1,12 +1,12 @@
-diff --git a/cmd/testdata/repo/main.go b/internal/changed/testdata/repo/main.go
-index 353aede..8409e17 100644
+diff --git a/cmd/testdata/repo/main.go b/cmd/testdata/repo/main.go
+index c00d90a..89de200 100644
 --- a/cmd/testdata/repo/main.go
 +++ b/cmd/testdata/repo/main.go
-@@ -2,6 +2,7 @@
-
+@@ -3,6 +3,7 @@
  import (
  	_ "golang.org/x/mod/modfile"
+ 	_ "golang.org/x/net/http2/hpack"
 +	SYNTAX ERROR IN MAIN PACKAGE!
-
+ 
  	_ "example.com/test-repo/internal/consumer"
  )
