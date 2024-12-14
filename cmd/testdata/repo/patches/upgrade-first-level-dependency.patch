@@ -1,20 +1,22 @@
-diff --git a/cmd/testdata/repo/go.mod b/internal/changed/testdata/repo/go.mod
-index 75a5ef2..743302f 100644
+diff --git a/cmd/testdata/repo/go.mod b/cmd/testdata/repo/go.mod
+index 6a00067..c26c1b5 100644
 --- a/cmd/testdata/repo/go.mod
 +++ b/cmd/testdata/repo/go.mod
-@@ -4,6 +4,6 @@ go 1.21.0
-
+@@ -5,7 +5,7 @@ go 1.21.0
  require (
  	golang.org/x/mod v0.13.0
+ 	golang.org/x/net v0.2.0
 -	golang.org/x/sys v0.14.0
 +	golang.org/x/sys v0.15.0
  	golang.org/x/time v0.4.0
  )
-diff --git a/cmd/testdata/repo/go.sum b/internal/changed/testdata/repo/go.sum
-index e1f65f9..537901d 100644
+ 
+diff --git a/cmd/testdata/repo/go.sum b/cmd/testdata/repo/go.sum
+index 66b216a..9bd7316 100644
 --- a/cmd/testdata/repo/go.sum
 +++ b/cmd/testdata/repo/go.sum
-@@ -1,6 +1,6 @@
+@@ -2,7 +2,7 @@ github.com/golang/net v0.1.0 h1:OdUL2NijOYO92eC8Gg0QkD2xLc6udJYEL8zfSo50rFY=
+ github.com/golang/net v0.1.0/go.mod h1:Cx3nUiGt4eDBEyega/BKRp+/AlGL8hYe7U9odMt2Cco=
  golang.org/x/mod v0.13.0 h1:I/DsJXRlw/8l/0c24sM9yb0T4z9liZTduXvdAWYiysY=
  golang.org/x/mod v0.13.0/go.mod h1:hTbmBsO62+eylJbnUtE2MGJUyE7QWk4xUqPFrRgJ+7c=
 -golang.org/x/sys v0.14.0 h1:Vz7Qs629MkJkGyHxUlRHizWJRG2j8fbQKjELVSNhy7Q=
