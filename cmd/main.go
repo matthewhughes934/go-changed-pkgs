@@ -17,6 +17,7 @@ import (
 	"gitlab.com/matthewhughes/slogctx"
 	"golang.org/x/exp/maps"
 	"golang.org/x/mod/modfile"
+	"golang.org/x/mod/module"
 	"golang.org/x/tools/go/packages"
 
 	"github.com/utilitywarehouse/go-changed-pkgs/internal/flag"
@@ -131,6 +132,11 @@ func printChangedPackages(
 //   - The package contains a file that was changed between the two SHAs
 //   - The package imports a package from a 3rd party module that was changed between the to SHAs
 //   - The package imports a local package for which either of the above holds
+//
+// For a 3rd party module to be recorded as changed it must satisfy one of:
+//
+//   - Be included though a plain 'require' and have it's version changed, or
+//   - Be on the right side of a 'replace' that was added, updated, or removed between the two references
 func getChangedPackages(
 	ctx context.Context,
 	repoDir string,
@@ -280,8 +286,8 @@ func getChangedMods(
 	if err != nil {
 		return nil, err
 	}
+	changedMods := changedModsFromReplace(curModFile, oldModFile)
 
-	changedMods := map[string]struct{}{}
 	// we're not interested in modules that existed in the old go.mod
 	// but not the current one, since no packages should currently
 	// depend on them
@@ -289,7 +295,6 @@ func getChangedMods(
 	for _, req := range oldModFile.Require {
 		oldModMap[req.Mod.Path] = req
 	}
-
 	for _, req := range curModFile.Require {
 		if old, ok := oldModMap[req.Mod.Path]; ok {
 			if req.Mod.Version != old.Mod.Version {
@@ -299,6 +304,41 @@ func getChangedMods(
 	}
 
 	return changedMods, nil
+}
+
+func changedModsFromReplace(
+	curModFile *modfile.File,
+	oldModFile *modfile.File,
+) map[string]struct{} {
+	changedMods := map[string]struct{}{}
+	oldReplaceMap := map[string]module.Version{}
+	for _, replace := range oldModFile.Replace {
+		oldReplaceMap[replace.Old.Path] = replace.New
+	}
+
+	for _, replace := range curModFile.Replace {
+		path := replace.Old.Path
+		oldVersion, ok := oldReplaceMap[path]
+		if !ok {
+			// added a replace, mark the module as updated
+			changedMods[replace.Old.Path] = struct{}{}
+			continue
+		}
+
+		// updated right side of a replace directive
+		if oldVersion != replace.New {
+			changedMods[replace.Old.Path] = struct{}{}
+		}
+		delete(oldReplaceMap, path)
+	}
+
+	// replaces that previously existed, but no longer do: we must've replaced
+	// them
+	for path := range oldReplaceMap {
+		changedMods[path] = struct{}{}
+	}
+
+	return changedMods
 }
 
 func readModFiles(

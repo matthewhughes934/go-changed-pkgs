@@ -33,3 +33,10 @@ upgrade-second-level-dependency.patch:
 
 # change in files not related to any Go package
 change-in-unrelated-file.patch: []
+
+upgrade-replace-dependency.patch:
+  - ""
+add-replace.patch:
+  - ""
+remove-replace.patch:
+  - ""

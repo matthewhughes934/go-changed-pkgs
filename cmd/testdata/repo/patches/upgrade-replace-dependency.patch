@@ -1,0 +1,22 @@
+diff --git a/cmd/testdata/repo/go.mod b/cmd/testdata/repo/go.mod
+index 6a00067..1e7158a 100644
+--- a/cmd/testdata/repo/go.mod
++++ b/cmd/testdata/repo/go.mod
+@@ -9,4 +9,4 @@ require (
+ 	golang.org/x/time v0.4.0
+ )
+ 
+-replace golang.org/x/net => github.com/golang/net v0.1.0
++replace golang.org/x/net => github.com/golang/net v0.12.0
+diff --git a/cmd/testdata/repo/go.sum b/cmd/testdata/repo/go.sum
+index 66b216a..be256d4 100644
+--- a/cmd/testdata/repo/go.sum
++++ b/cmd/testdata/repo/go.sum
+@@ -1,5 +1,5 @@
+-github.com/golang/net v0.1.0 h1:OdUL2NijOYO92eC8Gg0QkD2xLc6udJYEL8zfSo50rFY=
+-github.com/golang/net v0.1.0/go.mod h1:Cx3nUiGt4eDBEyega/BKRp+/AlGL8hYe7U9odMt2Cco=
++github.com/golang/net v0.12.0 h1:I/8qo6xYSv8vGnNq5uO32idhfmPwuBor+Ifmv0u6gUs=
++github.com/golang/net v0.12.0/go.mod h1:zEVYFnQC7m/vmpQFELhcD1EWkZlX69l4oqgmer6hfKA=
+ golang.org/x/mod v0.13.0 h1:I/DsJXRlw/8l/0c24sM9yb0T4z9liZTduXvdAWYiysY=
+ golang.org/x/mod v0.13.0/go.mod h1:hTbmBsO62+eylJbnUtE2MGJUyE7QWk4xUqPFrRgJ+7c=
+ golang.org/x/sys v0.14.0 h1:Vz7Qs629MkJkGyHxUlRHizWJRG2j8fbQKjELVSNhy7Q=
