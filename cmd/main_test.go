@@ -14,6 +14,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli/v2"
 	"gopkg.in/yaml.v3"
+
+	"github.com/matthewhughes934/go-changed-pkgs/internal/git"
 )
 
 var (
@@ -77,7 +79,7 @@ func setupWorktree(t *testing.T, name string) string {
 	t.Cleanup(func() {
 		// try to cleanup the worktree, just to be polite
 		// but the TempDir should be deleted at the end of the test run regardless
-		if _, err := runGitCmd(context.Background(), "worktree", "remove", "--force", worktreePath); err != nil {
+		if _, err := git.RunGitCmd(context.Background(), "worktree", "remove", "--force", worktreePath); err != nil {
 			t.Logf(
 				"failed to remove worktree at %s (you may want to manually remove it): %v",
 				worktreePath,
@@ -364,7 +366,7 @@ func TestErrorsWhenFailsToQueryPackage(t *testing.T) {
 func mustRunGitCmd(t *testing.T, args ...string) string {
 	t.Helper()
 
-	stdout, err := runGitCmd(context.Background(), args...)
+	stdout, err := git.RunGitCmd(context.Background(), args...)
 	require.NoError(t, err)
 	return stdout
 }
