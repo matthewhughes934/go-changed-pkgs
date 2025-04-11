@@ -10,8 +10,8 @@ jobs:
     strategy:
       matrix:
         go_version:
-          - "1.22"
-          - "1.23"
+          - "stable"
+          - "oldstable"
         os:
           - windows-latest
           - ubuntu-latest
