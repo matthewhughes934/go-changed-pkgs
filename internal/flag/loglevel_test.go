@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli/v2"
 
-	"github.com/utilitywarehouse/go-changed-pkgs/internal/flag"
+	"github.com/matthewhughes934/go-changed-pkgs/internal/flag"
 )
 
 func TestSlogLevelValue_ValidValues(t *testing.T) {
