@@ -95,14 +95,14 @@ func buildApp(out io.Writer) *cli.App {
 					&slog.HandlerOptions{Level: logLvl},
 				),
 			)
-			ctx := slogctx.WithLogger(cCtx.Context, logger)
-			return printChangedPackages(ctx, out, repoDir, modDir, fromRef, toRef)
+			return printChangedPackages(cCtx.Context, logger, out, repoDir, modDir, fromRef, toRef)
 		},
 	}
 }
 
 func printChangedPackages(
 	ctx context.Context,
+	logger *slog.Logger,
 	out io.Writer,
 	repoDir string,
 	modDir string,
@@ -111,6 +111,7 @@ func printChangedPackages(
 ) error {
 	packages, err := getChangedPackages(
 		ctx,
+		logger,
 		repoDir,
 		modDir,
 		fromRef,
@@ -139,11 +140,13 @@ func printChangedPackages(
 //   - Be on the right side of a 'replace' that was added, updated, or removed between the two references
 func getChangedPackages(
 	ctx context.Context,
+	logger *slog.Logger,
 	repoDir string,
 	modDir string,
 	fromRef string,
 	toRef string,
 ) ([]string, error) {
+	ctx = slogctx.WithLogger(ctx, logger)
 	pkgs, err := loadLocalPackages(ctx, modDir)
 	if err != nil {
 		return nil, err
