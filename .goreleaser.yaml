@@ -44,4 +44,4 @@ changelog:
   disable: true
 
 release:
-  header: See [the changelog](https://github.com/utilitywarehouse/go-changed-pkgs/blob/{{.Tag}}/CHANGELOG.md)
+  header: See [the changelog](https://github.com/matthewhughes934/go-changed-pkgs/blob/{{.Tag}}/CHANGELOG.md)

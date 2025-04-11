@@ -1,4 +1,4 @@
-module github.com/utilitywarehouse/go-changed-pkgs
+module github.com/matthewhughes934/go-changed-pkgs
 
 go 1.23.0
 

@@ -20,7 +20,7 @@ import (
 	"golang.org/x/mod/module"
 	"golang.org/x/tools/go/packages"
 
-	"github.com/utilitywarehouse/go-changed-pkgs/internal/flag"
+	"github.com/matthewhughes934/go-changed-pkgs/internal/flag"
 )
 
 const (
