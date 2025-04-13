@@ -1,6 +1,6 @@
 .PHONY: coverage.out
 coverage.out:
-	@go test -race -coverprofile $@ ./...
+	@go test -race -coverprofile $@ -coverpkg ./... ./...
 
 go-cov.out: coverage.out
 	@go run gitlab.com/matthewhughes/go-cov/cmd/go-cov add-skips $^ > go-cov.out
