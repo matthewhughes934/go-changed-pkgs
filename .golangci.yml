@@ -1,34 +1,11 @@
+version: "2"
 run:
   tests: true
-
-linters-settings:
-  errcheck:
-    check-type-assertions: true
-    check-blank: true
-  revive:
-    rules:
-      - name: exported
-        disabled: true
-      - name: context-as-argument
-        disabled: false
-  nolintlint:
-    require-specific: true
-  errorlint:
-    errorf: false
-  gci:
-    sections:
-      - standard
-      - default
-      - localmodule
 linters:
-  enable-all: true
-
+  default: all
   disable:
-    # deprecated linters
-    - exportloopref
-
     # conflicting/cover same issues
-    - forcetypeassert # covered by errcheck
+    - forcetypeassert # coverd by errcheck
 
     # personal preference
     - gocritic
@@ -45,3 +22,47 @@ linters:
     # premature optimisation that creates inconsistent code (sometimes Sprintf, sometimes string concatenation)
     # consider enabling _if_ you've profile performance _and_ Sprintf calls are slowing you down
     - perfsprint
+  settings:
+    errcheck:
+      check-type-assertions: true
+      check-blank: true
+    errorlint:
+      errorf: false
+    nolintlint:
+      require-specific: true
+    revive:
+      rules:
+        - name: exported
+          disabled: true
+        - name: context-as-argument
+          disabled: false
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+    - golines
+  settings:
+    gci:
+      sections:
+        - standard
+        - default
+        - localmodule
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

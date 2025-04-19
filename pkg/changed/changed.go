@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"maps"
 	"path/filepath"
 	"slices"
 	"strings"
 
 	"gitlab.com/matthewhughes/slogctx"
-	"golang.org/x/exp/maps"
 	"golang.org/x/mod/modfile"
 	"golang.org/x/mod/module"
 	"golang.org/x/tools/go/packages"
@@ -78,7 +78,10 @@ func GetChangedPackages(
 		}
 	}
 
-	return maps.Keys(changedPackages), nil
+	return slices.AppendSeq(
+		make([]string, 0, len(changedPackages)),
+		maps.Keys(changedPackages),
+	), nil
 }
 
 func loadLocalPackages(ctx context.Context, modDir string) ([]*packages.Package, error) {
