@@ -31,8 +31,6 @@ gitlab.com/matthewhughes/signalctx v0.1.0 h1:Mo11/Nh2nfyWZaRz3YI0a6iqI1Z2KOAviae
 gitlab.com/matthewhughes/signalctx v0.1.0/go.mod h1:EaDNvEC/XQoNwgf3STyu6qL9WZ+OtDN7+jj+zrASZ3I=
 gitlab.com/matthewhughes/slogctx v0.2.0 h1:JOvSSp15IW08HIVV3gFCzwLn4hii0hXxD0RCfKP52p4=
 gitlab.com/matthewhughes/slogctx v0.2.0/go.mod h1:GagyMC87srtYHICSdR+DUgQJslxr8fc8CmgpG2jSgiw=
-golang.org/x/exp v0.0.0-20241108190413-2d47ceb2692f h1:XdNn9LlyWAhLVp6P/i8QYBW+hlyhrhei9uErw2B5GJo=
-golang.org/x/exp v0.0.0-20241108190413-2d47ceb2692f/go.mod h1:D5SMRVC3C2/4+F/DB1wZsLRnSNimn2Sp/NPsCrsv8ak=
 golang.org/x/mod v0.23.0 h1:Zb7khfcRGKk+kqfxFaP5tZqCnDZMjC5VtUBs87Hr6QM=
 golang.org/x/mod v0.23.0/go.mod h1:6SkKJ3Xj0I0BrPOZoBy3bdMptDDU9oJrpohJ3eWZ1fY=
 golang.org/x/sync v0.11.0 h1:GGz8+XQP4FvTTrjZPzNKTMFtSXH80RAzG+5ghFPgK9w=

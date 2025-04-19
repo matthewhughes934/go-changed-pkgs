@@ -8,7 +8,6 @@ require (
 	gitlab.com/matthewhughes/go-cov v0.5.0
 	gitlab.com/matthewhughes/signalctx v0.1.0
 	gitlab.com/matthewhughes/slogctx v0.2.0
-	golang.org/x/exp v0.0.0-20241108190413-2d47ceb2692f
 	golang.org/x/mod v0.23.0
 	golang.org/x/tools v0.30.0
 	gopkg.in/yaml.v3 v3.0.1
