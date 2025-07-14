@@ -8,8 +8,8 @@ require (
 	gitlab.com/matthewhughes/go-cov v0.5.0
 	gitlab.com/matthewhughes/signalctx v0.1.0
 	gitlab.com/matthewhughes/slogctx v0.2.0
-	golang.org/x/mod v0.25.0
-	golang.org/x/tools v0.34.0
+	golang.org/x/mod v0.26.0
+	golang.org/x/tools v0.35.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -22,5 +22,5 @@ require (
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
-	golang.org/x/sync v0.15.0 // indirect
+	golang.org/x/sync v0.16.0 // indirect
 )
