@@ -3,13 +3,13 @@ module github.com/matthewhughes934/go-changed-pkgs
 go 1.23.0
 
 require (
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.0
 	github.com/urfave/cli/v2 v2.27.7
 	gitlab.com/matthewhughes/go-cov v0.5.0
 	gitlab.com/matthewhughes/signalctx v0.1.0
 	gitlab.com/matthewhughes/slogctx v0.2.0
-	golang.org/x/mod v0.26.0
-	golang.org/x/tools v0.35.0
+	golang.org/x/mod v0.27.0
+	golang.org/x/tools v0.36.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
